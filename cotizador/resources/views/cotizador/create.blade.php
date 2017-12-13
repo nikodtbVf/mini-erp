@@ -16,6 +16,14 @@
 			      <option value="{{$item->id}}">{{$item->tipo}}</option>
 			    @endforeach
 			  </select>
+			</div>
+			<div class="form-group col-sm-4">
+			  {!! Form::Label('cinturon', 'Cinturon:') !!}
+			  <select class="form-control" name="cinturon_id">
+			    @foreach($cinturons as $cin)
+			      <option value="{{$cin->id}}">{{$cin->nombre}}</option>
+			    @endforeach
+			  </select>
 			</div>	
 			 <div class="col-sm-12">
 			 	<div class="col-sm-6">

@@ -8,6 +8,7 @@ use Cotizador\Http\Requests;
 use Cotizador\Http\Controllers\Controller;
 use Cotizador\Barreno;
 use Cotizador\Medida;
+use Cotizador\Cinturon;
 use Cotizador\Cotizador;
 class CotizadorController extends Controller
 {
@@ -30,7 +31,8 @@ class CotizadorController extends Controller
     {  
         $items = Barreno::all(['id', 'tipo']);
         $medidas = Medida::all(['id', 'medida']);
-        return view('cotizador.create',compact('items','medidas'));
+        $cinturons = Cinturon::all(['id', 'nombre']);
+        return view('cotizador.create',compact('items','medidas','cinturons'));
     }
 
     /**
@@ -44,9 +46,11 @@ class CotizadorController extends Controller
        $barreno_costo = 0;
        $barreno_id = $request['barreno_id'];
        $medida_id = $request['medida_id'];
+       $cinturon_id = $request['cinturon_id'];
        $barreno_costo = Barreno::find($barreno_id)->costo;
        $medida_costo = Medida::find($medida_id)->costo;
-       $costo_final =  $barreno_costo + $medida_costo;
+       $costo_cinturon = Cinturon::find($cinturon_id)->costo;
+       $costo_final =  $barreno_costo + $medida_costo+$costo_cinturon;
        return view('cotizador.mostrar',compact('costo_final'));
     }
 
